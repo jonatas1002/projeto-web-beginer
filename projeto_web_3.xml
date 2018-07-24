@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 4.7.4
+- https://www.phpmyadmin.net
+-
+- Host: 127.0.0.1
+- Generation Time: 22-Jan-2018 às 00:50
+- Versão do servidor: 10.1.29-MariaDB
+- PHP Version: 7.2.0
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="https://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="projeto_web_3" collation="latin1_swedish_ci" charset="latin1">
+            <pma:table name="nivel_acesso">
+                CREATE TABLE `nivel_acesso` (
+                  `cod_acesso` int(11) NOT NULL AUTO_INCREMENT,
+                  `nivel` varchar(255) NOT NULL,
+                  `descricao` varchar(255) NOT NULL,
+                  PRIMARY KEY (`cod_acesso`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="pedido">
+                CREATE TABLE `pedido` (
+                  `cod_pedido` int(11) NOT NULL AUTO_INCREMENT,
+                  `cod_produto` int(11) NOT NULL,
+                  `cod_usuario` int(11) NOT NULL,
+                  `cod_situacao` int(11) NOT NULL DEFAULT '1',
+                  `quantidade` int(11) NOT NULL,
+                  `data_pedido` date DEFAULT NULL,
+                  `data_entrega` date DEFAULT NULL,
+                  `observacao` varchar(255) DEFAULT NULL,
+                  `cliente` varchar(100) DEFAULT NULL,
+                  PRIMARY KEY (`cod_pedido`),
+                  KEY `cod_produto` (`cod_produto`),
+                  KEY `cod_usuario` (`cod_usuario`),
+                  KEY `cod_situacao` (`cod_situacao`),
+                  CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`cod_produto`) REFERENCES `produto` (`cod_produto`),
+                  CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`cod_usuario`) REFERENCES `usuarios` (`cod_usuario`),
+                  CONSTRAINT `pedido_ibfk_3` FOREIGN KEY (`cod_situacao`) REFERENCES `situacao` (`cod_situacao`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="produto">
+                CREATE TABLE `produto` (
+                  `cod_produto` int(11) NOT NULL AUTO_INCREMENT,
+                  `produto` varchar(255) NOT NULL,
+                  `peso` int(11) DEFAULT NULL,
+                  `formula` int(11) DEFAULT NULL,
+                  PRIMARY KEY (`cod_produto`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="situacao">
+                CREATE TABLE `situacao` (
+                  `cod_situacao` int(11) NOT NULL AUTO_INCREMENT,
+                  `situacao` varchar(20) DEFAULT NULL,
+                  `descricao` varchar(255) DEFAULT NULL,
+                  PRIMARY KEY (`cod_situacao`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+            </pma:table>
+            <pma:table name="usuarios">
+                CREATE TABLE `usuarios` (
+                  `cod_usuario` int(11) NOT NULL AUTO_INCREMENT,
+                  `nome` varchar(255) NOT NULL,
+                  `usuario` varchar(255) NOT NULL,
+                  `senha` varchar(255) NOT NULL,
+                  `ativo` tinyint(1) DEFAULT '0',
+                  `nivel` int(11) NOT NULL,
+                  PRIMARY KEY (`cod_usuario`),
+                  KEY `nivel` (`nivel`),
+                  CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`nivel`) REFERENCES `nivel_acesso` (`cod_acesso`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Database: 'projeto_web_3'
+    -->
+    <database name="projeto_web_3">
+        <!-- Tabela nivel_acesso -->
+        <table name="nivel_acesso">
+            <column name="cod_acesso">1</column>
+            <column name="nivel">Administrador</column>
+            <column name="descricao">Administrador do sistema, todas as funcionalidades liberadas, adicionar, remover e alterar</column>
+        </table>
+        <table name="nivel_acesso">
+            <column name="cod_acesso">2</column>
+            <column name="nivel">Usuario</column>
+            <column name="descricao">Realiza pedidos de producao, visualiza e altera seus propios pedidos</column>
+        </table>
+        <!-- Tabela pedido -->
+        <table name="pedido">
+            <column name="cod_pedido">17</column>
+            <column name="cod_produto">11</column>
+            <column name="cod_usuario">2</column>
+            <column name="cod_situacao">1</column>
+            <column name="quantidade">1000</column>
+            <column name="data_pedido">2018-01-22</column>
+            <column name="data_entrega">2018-02-06</column>
+            <column name="observacao">Teste inclusÃ£o de pedido</column>
+            <column name="cliente">Jonatas</column>
+        </table>
+        <!-- Tabela produto -->
+        <table name="produto">
+            <column name="cod_produto">1</column>
+            <column name="produto">Racao Engorda Plus</column>
+            <column name="peso">40</column>
+            <column name="formula">NULL</column>
+        </table>
+        <table name="produto">
+            <column name="cod_produto">2</column>
+            <column name="produto">Racao Engorda 16%</column>
+            <column name="peso">40</column>
+            <column name="formula">NULL</column>
+        </table>
+        <table name="produto">
+            <column name="cod_produto">3</column>
+            <column name="produto">Racao Aves Crescimento</column>
+            <column name="peso">40</column>
+            <column name="formula">NULL</column>
+        </table>
+        <table name="produto">
+            <column name="cod_produto">4</column>
+            <column name="produto">Proteico Acabamento</column>
+            <column name="peso">30</column>
+            <column name="formula">NULL</column>
+        </table>
+        <table name="produto">
+            <column name="cod_produto">5</column>
+            <column name="produto">RaÃ§Ã£o Aves Postura</column>
+            <column name="peso">40</column>
+            <column name="formula">NULL</column>
+        </table>
+        <table name="produto">
+            <column name="cod_produto">6</column>
+            <column name="produto">RaÃ§Ã£o Aves Inicial</column>
+            <column name="peso">40</column>
+            <column name="formula">NULL</column>
+        </table>
+        <table name="produto">
+            <column name="cod_produto">7</column>
+            <column name="produto">Proteico Aguas 20%</column>
+            <column name="peso">30</column>
+            <column name="formula">NULL</column>
+        </table>
+        <table name="produto">
+            <column name="cod_produto">8</column>
+            <column name="produto">Proteico Aguas 25%</column>
+            <column name="peso">30</column>
+            <column name="formula">NULL</column>
+        </table>
+        <table name="produto">
+            <column name="cod_produto">9</column>
+            <column name="produto">RaÃ§Ã£o Suino</column>
+            <column name="peso">40</column>
+            <column name="formula">NULL</column>
+        </table>
+        <table name="produto">
+            <column name="cod_produto">10</column>
+            <column name="produto">Sal 65+peso</column>
+            <column name="peso">30</column>
+            <column name="formula">NULL</column>
+        </table>
+        <table name="produto">
+            <column name="cod_produto">11</column>
+            <column name="produto">Sal Cria Cromo</column>
+            <column name="peso">30</column>
+            <column name="formula">NULL</column>
+        </table>
+        <!-- Tabela situacao -->
+        <table name="situacao">
+            <column name="cod_situacao">1</column>
+            <column name="situacao">Aguardando</column>
+            <column name="descricao">Aguardando a vez de ser produzida ou aprovacao</column>
+        </table>
+        <table name="situacao">
+            <column name="cod_situacao">2</column>
+            <column name="situacao">Produzindo</column>
+            <column name="descricao">Em processo de fabricacao</column>
+        </table>
+        <table name="situacao">
+            <column name="cod_situacao">3</column>
+            <column name="situacao">Concluido</column>
+            <column name="descricao">Ja foi produzido, pronto para ser carregado</column>
+        </table>
+        <table name="situacao">
+            <column name="cod_situacao">4</column>
+            <column name="situacao">Finalizado</column>
+            <column name="descricao">Finalizado ou cancelado</column>
+        </table>
+        <!-- Tabela usuarios -->
+        <table name="usuarios">
+            <column name="cod_usuario">2</column>
+            <column name="nome">jonatas stein ribeiro</column>
+            <column name="usuario">jonatas</column>
+            <column name="senha">jonatas</column>
+            <column name="ativo">1</column>
+            <column name="nivel">1</column>
+        </table>
+    </database>
+</pma_xml_export>
